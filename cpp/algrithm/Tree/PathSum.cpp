@@ -28,7 +28,7 @@ class solution{
         }
         dfs(root->left);
         dfs(root->right);
-        //»ØËÝ
+        //»ØËÝ`1
         sum-=root->val;
         list.pop_back();
      }
