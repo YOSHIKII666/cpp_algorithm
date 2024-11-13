@@ -2,6 +2,7 @@
 #include<string>
 #include<unordered_map>
 #include<iostream>
+#include<algorithm>
 class solution{
     public:
         std::vector<std::vector<std::string>> groupAngrams(std::vector<std::string>& strs){
