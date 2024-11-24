@@ -16,4 +16,5 @@ add_executable(cpp_algorithm
         cpp/algrithm/multi_thread/thread_pool_ABC.cpp
         cpp/algrithm/dp/longestArith.cpp
         cpp/algrithm/dp/minDistance.cpp
-        cpp/algrithm/dp/minASCII.cpp)
+        cpp/algrithm/dp/minASCII.cpp
+        cpp/algrithm/greedy/partionLabel.cpp)
