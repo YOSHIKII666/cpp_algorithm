@@ -15,5 +15,5 @@ public:
         root->right=pruneTree(root->right);
         if(root->left==nullptr&&root->right==nullptr&&root->val=0) root=nullptr;
         return root;
-    }
+    } 
 };
