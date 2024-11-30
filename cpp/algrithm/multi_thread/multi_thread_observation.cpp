@@ -13,9 +13,9 @@ public:
 class subject {
 public:
     std::vector<observer*> vector_;
-    virtual void add(observer*);
-    virtual void deleted(observer*);
-    virtual void notifyAll();
+    virtual void add(observer*)=0;
+    virtual void deleted(observer*)=0;
+    virtual void notifyAll()=0;
     virtual ~subject()=default;
 };
 
@@ -36,6 +36,8 @@ public:
         }
     }
     void notifyAll() override {
+        //设置一个互斥锁，防止在遍历时析构函数被触发了，导致空指针异常
+        std::lock_guard<std::mutex> guard(mutex_);
         for(observer* ob:vector_) {
             ob->update(price);
         }
@@ -69,7 +71,7 @@ public:
         s.add(this);
     }
     void update(double cost) override {
-        std::cout<<"price is:"<<cost*2<<std::endl;
+        std::cout<<"price is:"<<cost*3<<std::endl;
     }
     ~wall() {
         s.deleted(this);
@@ -84,11 +86,9 @@ void addp(concreat& sub) {
 
 int main(int argc, char *argv[]) {
     concreat sub;
+        wall w(sub);
+        sub.set(400);
+        sub.notifyAll();
     std::thread t(addp,std::ref(sub));
-
-    wall w(sub);
-    sub.set(400);
-    sub.notifyAll();
-
-    t.join();
+    t.join();//主线程等待thread处理完
 }
